@@ -1,0 +1,44 @@
+{
+  "name": "Spaghetti Carbonara",
+  "photo": "https://cdn.aniagotuje.com/pictures/articles/2020/01/1967583-v-1500x1500.jpg",
+  "description": "A classic Roman pasta dish with a silky egg-and-cheese sauce.",
+  "prep_time": "10 min",
+  "cook_time": "20 min",
+  "servings": 4,
+  "ingredients": [
+    {
+      "group": "Pasta",
+      "items": [
+        { "amount": "400 g",   "name": "spaghetti" },
+        { "amount": "",        "name": "coarse salt, for the water" }
+      ]
+    },
+    {
+      "group": "Sauce",
+      "items": [
+        { "amount": "200 g",   "name": "guanciale or pancetta, diced" },
+        { "amount": "4",       "name": "egg yolks" },
+        { "amount": "1",       "name": "whole egg" },
+        { "amount": "80 g",    "name": "Pecorino Romano, finely grated" },
+        { "amount": "40 g",    "name": "Parmesan, finely grated" },
+        { "amount": "to taste","name": "freshly cracked black pepper" }
+      ]
+    },
+    {
+      "group": "To serve",
+      "items": [
+        { "amount": "",        "name": "extra Pecorino Romano" },
+        { "amount": "",        "name": "freshly cracked black pepper" }
+      ]
+    }
+  ],
+  "instructions": [
+    "Bring a large pot of generously salted water to a boil. Cook the spaghetti until al dente according to the package directions.",
+    "While the pasta cooks, place the guanciale in a cold skillet and set over medium heat. Cook, stirring occasionally, until golden and the fat has rendered, about 7 minutes. Remove the pan from the heat and set aside — do not discard the fat.",
+    "In a mixing bowl, whisk together the egg yolks, whole egg, Pecorino Romano, and Parmesan. Season very generously with black pepper.",
+    "Reserve at least 1 cup (240 ml) of the pasta cooking water, then drain the spaghetti.",
+    "Add the hot spaghetti directly to the skillet with the guanciale. Toss well to coat in the fat.",
+    "Remove the skillet from the heat entirely. Pour the egg mixture over the pasta and toss vigorously, adding reserved pasta water a tablespoon at a time, until the sauce is creamy and clings to every strand.",
+    "Serve immediately in warmed bowls, topped with extra Pecorino and a generous crack of black pepper."
+  ]
+}

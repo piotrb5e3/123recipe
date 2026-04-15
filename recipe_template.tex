@@ -1,0 +1,161 @@
+\documentclass[11pt,a4paper]{article}
+
+% ── Encoding & fonts ──────────────────────────────────────────────────────────
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ── Page geometry ─────────────────────────────────────────────────────────────
+\usepackage[top=1.2cm, bottom=1.2cm, left=1.2cm, right=1.2cm]{geometry}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+% ── Graphics & colour ─────────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+
+\definecolor{accent}{HTML}{C55A11}   % warm orange (prints as dark grey in B&W)
+\definecolor{rulecol}{HTML}{888888}  % mid-grey — clear border in both colour and B&W
+
+% ── Two-column layout ─────────────────────────────────────────────────────────
+\usepackage{paracol}
+\setlength{\columnsep}{1.8em}
+
+% ── Lists & alignment ────────────────────────────────────────────────────────
+\usepackage{enumitem}
+\usepackage{ragged2e}
+
+% ── Boxes ─────────────────────────────────────────────────────────────────────
+\usepackage[most]{tcolorbox}
+
+\tcbset{
+  infochip/.style={
+    enhanced, boxrule=0.5pt, arc=5pt,
+    colback=white, colframe=rulecol,
+    top=3pt, bottom=3pt, left=8pt, right=8pt,
+    nobeforeafter, tcbox raise base,
+    fontupper=\small
+  }
+}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+%% ═══ HEADER ══════════════════════════════════════════════════════════════════
+\begin{center}
+  {\fontsize{28}{33}\selectfont\bfseries\color{accent}
+    << recipe.name | latex >>}\par
+\end{center}
+
+\vspace{0.5em}
+
+<% if recipe.photo %>
+%% Photo on the left, info panel on the right ─────────────────────────────────
+\noindent
+\begin{minipage}[c]{0.58\textwidth}
+  \centering
+  \includegraphics[width=\linewidth, height=6.5cm, keepaspectratio]{<< recipe.photo >>}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.38\textwidth}
+  \RaggedRight
+<% if recipe.description %>
+  {\small\itshape\color{gray} << recipe.description | latex >>}\par
+  \vspace{0.9em}
+<% endif %>
+  \tcbox[infochip]{\textbf{Cook time:}\enspace << recipe.cook_time | latex >>}\par
+<% if recipe.prep_time %>
+  \vspace{4pt}
+  \tcbox[infochip]{\textbf{Prep time:}\enspace << recipe.prep_time | latex >>}\par
+<% endif %>
+<% if recipe.servings %>
+  \vspace{4pt}
+  \tcbox[infochip]{\textbf{Serves:}\enspace << recipe.servings >>}\par
+<% endif %>
+\end{minipage}
+
+<% else %>
+%% No photo: centred chips in a row ───────────────────────────────────────────
+\begin{center}
+<% if recipe.description %>
+  {\small\itshape\color{gray} << recipe.description | latex >>}\par
+  \vspace{0.6em}
+<% endif %>
+  \tcbox[infochip]{\textbf{Cook time:}\enspace << recipe.cook_time | latex >>}%
+<% if recipe.prep_time %>
+  \quad\tcbox[infochip]{\textbf{Prep time:}\enspace << recipe.prep_time | latex >>}%
+<% endif %>
+<% if recipe.servings %>
+  \quad\tcbox[infochip]{\textbf{Serves:}\enspace << recipe.servings >>}%
+<% endif %>
+\end{center}
+<% endif %>
+
+\vspace{0.9em}
+{\color{black!25}\hrule height 1.2pt}
+\vspace{1em}
+
+%% ═══ BODY ════════════════════════════════════════════════════════════════════
+\columnratio{0.30}
+\begin{paracol}{2}
+
+%% ── LEFT COLUMN: Ingredients ─────────────────────────────────────────────────
+
+\begin{tcolorbox}[
+  enhanced,
+  colback=white, colframe=rulecol, arc=6pt, boxrule=0.8pt,
+  title={\bfseries\color{accent} Ingredients},
+  attach boxed title to top left={yshift=-2.5mm, xshift=5mm},
+  boxed title style={
+    colback=white, colframe=rulecol, arc=4pt, boxrule=0.8pt
+  },
+  top=8pt, bottom=6pt, left=4pt, right=4pt,
+  before upper={\RaggedRight},
+]
+
+<% for group in recipe.ingredients %>
+<% if group.group %>
+  {\small\bfseries\color{accent} << group.group | latex >>}\\[2pt]
+<% endif %>
+  \begin{itemize}[
+    leftmargin=*,
+    label=\textcolor{accent}{\small$\bullet$},
+    itemsep=3pt, topsep=0pt, parsep=0pt
+  ]
+<% for item in group['items'] %>
+    \item {\small%
+<% if item.amount %>
+      \mbox{\textbf{<< item.amount | latex >>}}\enspace%
+<% endif %>
+      << item.name | latex >>}
+<% endfor %>
+  \end{itemize}
+<% if not loop.last %>
+  \vspace{5pt}
+<% endif %>
+<% endfor %>
+
+\end{tcolorbox}
+
+\switchcolumn
+
+%% ── RIGHT COLUMN: Instructions ───────────────────────────────────────────────
+
+{\large\bfseries\color{accent} Instructions}\\[4pt]
+{\color{black!25}\hrule height 0.6pt}
+\vspace{8pt}
+
+\begin{enumerate}[
+  leftmargin=*,
+  label=\textcolor{accent}{\bfseries\arabic*.},
+  itemsep=9pt, topsep=0pt, parsep=2pt
+]
+<% for step in recipe.instructions %>
+  \item << step | latex >>
+<% endfor %>
+\end{enumerate}
+
+\end{paracol}
+
+\end{document}
