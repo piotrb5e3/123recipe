@@ -61,7 +61,7 @@
 \begin{tcolorbox}[
   enhanced,
   colback=white, colframe=rulecol, arc=6pt, boxrule=0.8pt,
-  title={\bfseries\color{accent} Ingredients},
+  title={\bfseries\color{accent} Składniki},
   attach boxed title to top left={yshift=-2.5mm, xshift=5mm},
   boxed title style={
     colback=white, colframe=rulecol, arc=4pt, boxrule=0.8pt
@@ -102,16 +102,16 @@
 \noindent\includegraphics[width=\linewidth, height=6.5cm, keepaspectratio]{<< recipe.photo >>}\par
 \vspace{0.5em}
 <% endif %>
-\noindent\tcbox[infochip]{\textbf{Cook:}\enspace << recipe.cook_time | latex >>}%
+\noindent\tcbox[infochip]{\textbf{Gotowanie:}\enspace << recipe.cook_time | latex >>}%
 <% if recipe.prep_time %>
-\quad\tcbox[infochip]{\textbf{Prep:}\enspace << recipe.prep_time | latex >>}%
+\quad\tcbox[infochip]{\textbf{Przygotowanie:}\enspace << recipe.prep_time | latex >>}%
 <% endif %>
 <% if recipe.servings %>
-\quad\tcbox[infochip]{\textbf{Serves:}\enspace << recipe.servings >>}%
+\quad\tcbox[infochip]{\textbf{Porcje:}\enspace << recipe.servings >>}%
 <% endif %>
 \par\vspace{0.8em}
 
-{\large\bfseries\color{accent} Instructions}\\[4pt]
+{\large\bfseries\color{accent} Przygotowanie}\\[4pt]
 {\color{black!25}\hrule height 0.6pt}
 \vspace{8pt}
 
@@ -129,7 +129,7 @@
 
 <% if recipe.source %>
 \vfill
-\noindent{\footnotesize\color{gray} Source: << recipe.source | latex >>}
+\noindent{\footnotesize\color{gray} Źródło: << recipe.source | latex >>}
 <% endif %>
 
 \end{document}
