@@ -6,15 +6,14 @@ Generate beautiful recipe PDFs from a simple JSON file using a LaTeX template.
 
 ```
 ┌──────────────────────────────────────────────┐
-│           Recipe Name                        │
-│              [photo]                         │
-│   Cook: 20 min  │  Prep: 10 min  │ Serves: 4 │
+│              Recipe Name                     │
 ├──────────┬───────────────────────────────────┤
-│          │                                   │
-│Ingredients  Instructions                     │
+│          │  [photo]                          │
+│Ingredients  Cook: 20 min  Prep: 10 min       │
+│ • item   │                                   │
+│ • item   │  Instructions                     │
 │ • item   │  1. Step one…                     │
-│ • item   │  2. Step two…                     │
-│          │                                   │
+│          │  2. Step two…                     │
 └──────────┴───────────────────────────────────┘
 ```
 
@@ -29,6 +28,18 @@ Install Python dependencies:
 
 ```bash
 pip install -r requirements.txt
+```
+
+### yt-dlp (optional — YouTube recipes only)
+
+`yt-dlp` is only needed when converting YouTube videos into recipes. Install a recent version via Homebrew (recommended) or pip:
+
+```bash
+# Homebrew (macOS) — always up to date
+brew install yt-dlp
+
+# pip — requires Python 3.10+
+pip install -U yt-dlp
 ```
 
 ## Usage
@@ -47,7 +58,7 @@ python generate_recipe.py example_recipe.json -t custom_template.tex
   "cook_time":   "20 min",               // required
   "prep_time":   "10 min",               // optional
   "servings":    4,                      // optional
-  "description": "Short tagline.",       // optional
+  "source":      "https://example.com",  // optional — rendered at the bottom for attribution
   "photo":       "path/to/photo.jpg",    // optional (relative to JSON file)
 
   // required — list of ingredient groups

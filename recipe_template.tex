@@ -49,50 +49,6 @@
 \end{center}
 
 \vspace{0.5em}
-
-<% if recipe.photo %>
-%% Photo on the left, info panel on the right ─────────────────────────────────
-\noindent
-\begin{minipage}[c]{0.58\textwidth}
-  \centering
-  \includegraphics[width=\linewidth, height=6.5cm, keepaspectratio]{<< recipe.photo >>}
-\end{minipage}%
-\hfill
-\begin{minipage}[c]{0.38\textwidth}
-  \RaggedRight
-<% if recipe.description %>
-  {\small\itshape\color{gray} << recipe.description | latex >>}\par
-  \vspace{0.9em}
-<% endif %>
-  \tcbox[infochip]{\textbf{Cook time:}\enspace << recipe.cook_time | latex >>}\par
-<% if recipe.prep_time %>
-  \vspace{4pt}
-  \tcbox[infochip]{\textbf{Prep time:}\enspace << recipe.prep_time | latex >>}\par
-<% endif %>
-<% if recipe.servings %>
-  \vspace{4pt}
-  \tcbox[infochip]{\textbf{Serves:}\enspace << recipe.servings >>}\par
-<% endif %>
-\end{minipage}
-
-<% else %>
-%% No photo: centred chips in a row ───────────────────────────────────────────
-\begin{center}
-<% if recipe.description %>
-  {\small\itshape\color{gray} << recipe.description | latex >>}\par
-  \vspace{0.6em}
-<% endif %>
-  \tcbox[infochip]{\textbf{Cook time:}\enspace << recipe.cook_time | latex >>}%
-<% if recipe.prep_time %>
-  \quad\tcbox[infochip]{\textbf{Prep time:}\enspace << recipe.prep_time | latex >>}%
-<% endif %>
-<% if recipe.servings %>
-  \quad\tcbox[infochip]{\textbf{Serves:}\enspace << recipe.servings >>}%
-<% endif %>
-\end{center}
-<% endif %>
-
-\vspace{0.9em}
 {\color{black!25}\hrule height 1.2pt}
 \vspace{1em}
 
@@ -126,7 +82,7 @@
 <% for item in group['items'] %>
     \item {\small%
 <% if item.amount %>
-      \mbox{\textbf{<< item.amount | latex >>}}\enspace%
+      \textbf{<< item.amount | latex >>}\enspace%
 <% endif %>
       << item.name | latex >>}
 <% endfor %>
@@ -140,7 +96,20 @@
 
 \switchcolumn
 
-%% ── RIGHT COLUMN: Instructions ───────────────────────────────────────────────
+%% ── RIGHT COLUMN: Photo + Times + Instructions ───────────────────────────────
+
+<% if recipe.photo %>
+\noindent\includegraphics[width=\linewidth, height=6.5cm, keepaspectratio]{<< recipe.photo >>}\par
+\vspace{0.5em}
+<% endif %>
+\noindent\tcbox[infochip]{\textbf{Cook:}\enspace << recipe.cook_time | latex >>}%
+<% if recipe.prep_time %>
+\quad\tcbox[infochip]{\textbf{Prep:}\enspace << recipe.prep_time | latex >>}%
+<% endif %>
+<% if recipe.servings %>
+\quad\tcbox[infochip]{\textbf{Serves:}\enspace << recipe.servings >>}%
+<% endif %>
+\par\vspace{0.8em}
 
 {\large\bfseries\color{accent} Instructions}\\[4pt]
 {\color{black!25}\hrule height 0.6pt}
@@ -157,5 +126,10 @@
 \end{enumerate}
 
 \end{paracol}
+
+<% if recipe.source %>
+\vfill
+\noindent{\footnotesize\color{gray} Source: << recipe.source | latex >>}
+<% endif %>
 
 \end{document}
