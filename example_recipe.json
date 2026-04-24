@@ -1,7 +1,6 @@
 {
   "name": "Spaghetti Carbonara",
   "photo": "https://cdn.aniagotuje.com/pictures/articles/2020/01/1967583-v-1500x1500.jpg",
-  "description": "A classic Roman pasta dish with a silky egg-and-cheese sauce.",
   "prep_time": "10 min",
   "cook_time": "20 min",
   "servings": 4,
@@ -9,26 +8,56 @@
     {
       "group": "Pasta",
       "items": [
-        { "amount": "400 g",   "name": "spaghetti" },
-        { "amount": "",        "name": "coarse salt, for the water" }
+        {
+          "amount": "400 g",
+          "name": "spaghetti"
+        },
+        {
+          "amount": "",
+          "name": "coarse salt, for the water"
+        }
       ]
     },
     {
       "group": "Sauce",
       "items": [
-        { "amount": "200 g",   "name": "guanciale or pancetta, diced" },
-        { "amount": "4",       "name": "egg yolks" },
-        { "amount": "1",       "name": "whole egg" },
-        { "amount": "80 g",    "name": "Pecorino Romano, finely grated" },
-        { "amount": "40 g",    "name": "Parmesan, finely grated" },
-        { "amount": "to taste","name": "freshly cracked black pepper" }
+        {
+          "amount": "200 g",
+          "name": "guanciale or pancetta, diced"
+        },
+        {
+          "amount": "4",
+          "name": "egg yolks"
+        },
+        {
+          "amount": "1",
+          "name": "whole egg"
+        },
+        {
+          "amount": "80 g",
+          "name": "Pecorino Romano, finely grated"
+        },
+        {
+          "amount": "40 g",
+          "name": "Parmesan, finely grated"
+        },
+        {
+          "amount": "to taste",
+          "name": "black pepper"
+        }
       ]
     },
     {
       "group": "To serve",
       "items": [
-        { "amount": "",        "name": "extra Pecorino Romano" },
-        { "amount": "",        "name": "freshly cracked black pepper" }
+        {
+          "amount": "",
+          "name": "extra Pecorino Romano"
+        },
+        {
+          "amount": "",
+          "name": "black pepper"
+        }
       ]
     }
   ],

@@ -73,6 +73,7 @@ When the source is a YouTube URL, extract the recipe in this order of priority:
    ```
    yt-dlp --write-auto-subs --skip-download --sub-langs en-orig --sub-format vtt -o /tmp/yt_recipe "<URL>"
    ```
+   *(Windows: replace `/tmp/yt_recipe` with a local path such as `yt_recipe`)*
    Then parse the `.vtt` file: strip timestamps, tags and duplicate lines to get clean text. Translate to Polish as part of the output schema.
 
 3. **Fetch the video description** as a fallback (often contains the ingredient list):

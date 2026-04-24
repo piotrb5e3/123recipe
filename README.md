@@ -1,48 +1,82 @@
 # 123recipe
 
-Generate beautiful recipe PDFs from a simple JSON file using a LaTeX template.
+Turn any recipe URL or YouTube cooking video into a beautiful, print-ready Polish-language PDF — using an AI agent and a LaTeX template.
+
+## How it works
+
+1. Give your AI agent a recipe URL or YouTube link
+2. The agent follows `agent_instructions.md` to extract the recipe and write a JSON file
+3. You run `generate_recipe.py` to render the PDF
 
 ## Layout
 
 ```
 ┌──────────────────────────────────────────────┐
-│              Recipe Name                     │
+│              Nazwa przepisu                  │
 ├──────────┬───────────────────────────────────┤
-│          │  [photo]                          │
-│Ingredients  Cook: 20 min  Prep: 10 min       │
+│          │  [zdjęcie]                        │
+│Składniki │  Gotowanie: 20 min  Przygot.: 10  │
 │ • item   │                                   │
-│ • item   │  Instructions                     │
-│ • item   │  1. Step one…                     │
-│          │  2. Step two…                     │
+│ • item   │  Przygotowanie                    │
+│ • item   │  1. Krok pierwszy…                │
+│          │  2. Krok drugi…                   │
 └──────────┴───────────────────────────────────┘
 ```
 
-## Requirements
+## Setup
 
-- Python 3.8+
-- [TeX Live](https://tug.org/texlive/) or [MiKTeX](https://miktex.org/) (`pdflatex` must be in `PATH`)
-  - macOS: `brew install --cask mactex-no-gui`
-  - Ubuntu/Debian: `sudo apt install texlive-latex-extra`
+### 1. Clone the repo
 
-Install Python dependencies:
+```bash
+git clone https://github.com/piotrb5e3/123recipe.git
+cd 123recipe
+```
+
+### 2. Install Python dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### yt-dlp (optional — YouTube recipes only)
+### 3. Install pdflatex
 
-`yt-dlp` is only needed when converting YouTube videos into recipes. Install a recent version via Homebrew (recommended) or pip:
+- macOS: `brew install --cask mactex-no-gui`
+- Ubuntu/Debian: `sudo apt install texlive-latex-extra`
+- Windows: [MiKTeX](https://miktex.org/)
+
+### 4. Install yt-dlp (YouTube recipes only)
 
 ```bash
-# Homebrew (macOS) — always up to date
+# macOS
 brew install yt-dlp
 
-# pip — requires Python 3.10+
+# pip
 pip install -U yt-dlp
 ```
 
-## Usage
+## Using with an AI agent
+
+Point your agent at `agent_instructions.md` — it contains the full extraction workflow.
+
+**GitHub Copilot CLI:**
+```
+@agent_instructions.md — here's a recipe URL: https://...
+```
+
+**Claude / Claude Code:**
+```
+Read agent_instructions.md and then process: https://...
+```
+
+**Any other agent:** paste the contents of `agent_instructions.md` into the system prompt or first message, then provide the URL.
+
+Once the agent writes a `.json` file, generate the PDF:
+
+```bash
+python generate_recipe.py kurczak_z_ryzem.json
+```
+
+## Generating a PDF manually
 
 ```bash
 python generate_recipe.py example_recipe.json

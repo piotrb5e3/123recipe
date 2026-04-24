@@ -13,6 +13,7 @@ import json
 import os
 import re
 import shutil
+import ssl
 import subprocess
 import sys
 import tempfile
@@ -22,6 +23,7 @@ from pathlib import Path
 from typing import Optional
 from urllib.error import URLError
 
+import certifi
 import jinja2
 
 
@@ -179,7 +181,12 @@ def download_photo(url: str, dest_dir: Path) -> Optional[str]:
     dest = dest_dir / f"photo{ext}"
     print(f"  Downloading photo: {url}")
     try:
-        urllib.request.urlretrieve(safe_url, dest)
+        req = urllib.request.Request(
+            safe_url,
+            headers={"User-Agent": "Mozilla/5.0 (compatible; recipe-generator/1.0)"},
+        )
+        with urllib.request.urlopen(req, timeout=15, context=ssl.create_default_context(cafile=certifi.where())) as resp:
+            dest.write_bytes(resp.read())
         return str(dest)
     except URLError as exc:
         print(f"Warning: could not download photo ({exc}) — it will be omitted from the PDF.")
